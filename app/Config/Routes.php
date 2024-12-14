@@ -28,6 +28,8 @@ $routes->post('offenses/edit/(:num)', 'Dashboard::editOffense/$1');
 $routes->delete('offenses/delete/(:num)', 'Dashboard::deleteOffense/$1');
 
 
+$routes->get('statistics/getOffenseData', 'StatisticsController::getOffenseData');
+
 
 $routes->get('statistics', 'StatisticsController::index');
 $routes->get('api/case-data', 'StatisticsController::getCaseData');
