@@ -1,0 +1,41 @@
+:root {
+    --primaryLight: #fafafa;
+    --primaryDark: #070f13;
+
+    --standardDark: rgb(20, 20, 20);
+    --card-color: rgb(23, 23, 23);
+
+    --pastelYellow: #f8f7f5;
+    --hoverpastelYellow: #eeece7;
+    --header: #ffffff;
+
+    --grey: #708090;
+
+    --red: #ee7a7a;
+    --darkRed: #3E1716;
+    --orange: #F24E43;
+
+    --green: #24AE7C;
+    --highlightGreen: #3dc56a;
+    --darkGreen: #0f3224;
+    --highlightdarkGreen:   #348a68;
+
+    --blue: #79B5EC;
+    --lightBlue: #7AC0EE;
+    --darkBlue: #192c3d;
+    --highlightBlue: #5fa6e9;
+   
+}   
+
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: auto;
+    border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--blue);
+    border-radius: 10px;
+}

@@ -1,0 +1,99 @@
+.side-panel {
+    position: fixed;
+    top: 0;
+    right: -270px;
+    width: 270px;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    transition: right 0.3s ease;
+    padding: 20px 10px;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.side-panel.active {
+    right: 0;
+}
+
+.side-panel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-panel ul li {
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.sidebar-toggle{
+    background-color: none;
+    border: none;
+    color: white;
+    display: flex;
+    right: 0;
+}
+
+.side-panel ul li:hover {
+    background-color: #444;
+}
+.side-panel .close-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.close-btn {
+    background: #333;
+    border: none;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 14%;
+    width: 30px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-btn:hover {
+    color: #ccc;
+}
+
+#togglePanelBtn {
+    background-color: none;
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#togglePanelBtn:focus {
+    outline: none;
+}
+
+#togglePanelBtn:hover {
+    color: #444;
+    transition: 0.45s ease-in-out;
+}
+
+.side-panel h5 {
+    margin: 0 0 15px;
+    font-size: 18px;
+    text-align: center;
+    color: #f8f9fa;
+}
+
+.side-panel p {
+    font-size: 14px;
+    margin: 10px;
+    color: #ccc;
+}
+
+.table{
+    margin-top: 1rem;
+}
