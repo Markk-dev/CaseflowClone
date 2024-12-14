@@ -1,54 +1,83 @@
 <?php
 
-    namespace App\Models;
+namespace App\Models;
 
-    use CodeIgniter\Model;
+use CodeIgniter\Model;
 
-    class CaseModel extends Model
+class CaseModel extends Model
+{
+    
+    protected $table = 'offense';  
+    protected $primaryKey = 'id';
+
+    
+    protected $allowedFields = [
+        'offense_type', 'name', 'description', 'severity', 'progress', 'location', 
+        'user_id', 'created_by', 'created_at', 'updated_at'
+    ];
+
+    
+    protected $useTimestamps = true;
+
+    
+    protected $validationRules = [
+        'offense_type'    => 'required|max_length[100]',  
+        'name'            => 'required|max_length[255]',  
+        'description'     => 'required',  
+        'severity'        => 'required|in_list[1st,2nd,3rd]',  
+    ];
+
+    
+    protected $validationMessages = [
+        'offense_type' => [
+            'required' => 'Offense type is required.',
+            'max_length' => 'Offense type must not exceed 100 characters.',
+        ],
+        'name' => [
+            'required' => 'Offense name is required.',
+            'max_length' => 'Offense name must not exceed 255 characters.',
+        ],
+        'description' => [
+            'required' => 'Description is required.',
+        ],
+        'severity' => [
+            'required' => 'Severity is required.',
+            'in_list' => 'Severity must be one of: 1st, 2nd, 3rd.',
+        ],
+    ];
+
+    
+    public function getOffenseWithCreator($id)
     {
-        protected $table = 'cases';
-        protected $primaryKey = 'id';
-        protected $allowedFields = ['case_type', 'description', 'case_priority', 'progress', 'location', 'user_id', 'created_by', 'created_at', 'updated_at'];
-        protected $useTimestamps = true;
-
-        protected $validationRules = [
-            'case_type'    => 'required|max_length[100]',
-            'description'  => 'required',
-            'case_priority' => 'required|in_list[High,Medium,Low]',
-        ];
-
-        protected $validationMessages = [
-            'case_type' => [
-                'required' => 'Case type is required.',
-                'max_length' => 'Case type must not exceed 100 characters.',
-            ],
-            'description' => [
-                'required' => 'Description is required.',
-            ],
-            'case_priority' => [
-                'required' => 'Priority is required.',
-                'in_list' => 'Priority must be one of: High, Medium, Low.',
-            ],
-        ];
-
-        public function getCaseWithCreator($id)
-        {
-            return $this->where('id', $id)->first();
-        }
-
-        public function isCreator($caseId, $userId)
-        {
-            $case = $this->getCaseWithCreator($caseId);
-            return $case && $case['user_id'] == $userId;  // Check if the user is the creator
-        }
-
-        public function countCompletedCases()
-        {
-            return $this->where('progress', 'Complete')->countAllResults();
-        }
-
-        public function getCasesByPriority()
-        {
-            return $this->orderBy('FIELD(case_priority, "High", "Medium", "Low")', 'ASC')->findAll();
-        }
+        return $this->where('id', $id)->first();
     }
+
+    
+    public function isCreator($offenseId, $userId)
+    {
+        $offense = $this->getOffenseWithCreator($offenseId);
+        return $offense && $offense['user_id'] == $userId;  
+    }
+
+    
+    public function countCompletedOffenses()
+    {
+        return $this->where('progress', 'Complete')->countAllResults();
+    }
+
+    
+    public function getOffensesBySeverity()
+    {
+        return $this->orderBy('FIELD(severity, "1st", "2nd", "3rd")', 'ASC')->findAll();
+    }
+
+    public function getTotalOffenses()
+    {
+        return $this->countAllResults(); 
+    }
+
+    public function getHighOffenses()
+    {
+        return $this->where('severity', '1st')->countAllResults(); 
+    }
+}

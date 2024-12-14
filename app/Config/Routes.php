@@ -6,38 +6,31 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-// Authentication 
+
 $routes->get('/', 'Auth::login');
 $routes->get('register', 'Auth::register');
 $routes->post('register', 'Auth::registerUser');
 $routes->get('login', 'Auth::login');
 $routes->post('login', 'Auth::loginUser');
 
-// Dashboard 
+
 $routes->get('dashboard', 'Dashboard::index');
-$routes->get('cases/create', 'Dashboard::createCasePage'); 
-$routes->post('cases/create', 'Dashboard::createCase');   
-$routes->post('cases/edit/(:num)', 'Dashboard::editCase/$1');
-$routes->post('cases/delete/(:num)', 'Dashboard::deleteCase/$1');
 
-$routes->get('user/getUserData', 'UserController::getUserData');
 
-//Edit 
-$routes->get('cases/edit/(:num)', 'ConfigController::edit/$1');
-$routes->post('cases/edit/(:num)', 'ConfigController::update/$1'); 
+$routes->get('cases/create', 'Dashboard::createOffensePage');  
+$routes->post('cases/create', 'Dashboard::createOffense');    
 
-//Delete 
-$routes->delete('cases/delete/(:num)', 'Dashboard::deleteCase/$1');
 
-// Statistics
+$routes->get('offenses/edit/(:num)', 'Dashboard::editOffensePage/$1');  
+$routes->post('offenses/edit/(:num)', 'Dashboard::editOffense/$1');     
+
+
+$routes->delete('offenses/delete/(:num)', 'Dashboard::deleteOffense/$1');
+
+
+
 $routes->get('statistics', 'StatisticsController::index');
 $routes->get('api/case-data', 'StatisticsController::getCaseData');
 
-//Complete 
+
 $routes->get('completed', 'CompletedCase::completedCases');
-
-
-
-
-
-
